@@ -1,6 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
-import { HelperText, TextInput, TextInputProps } from 'react-native-paper';
+import {
+  HelperText,
+  TextInput,
+  TextInputProps,
+} from 'react-native-paper';
 
 interface CustomTextInputProps extends TextInputProps {
   validationMessage?: string;
