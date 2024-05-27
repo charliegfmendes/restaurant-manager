@@ -5,10 +5,15 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { PaperProvider, Button } from 'react-native-paper';
 import CustomNavigationBar from './components/CustomNavigationBar';
+import AuthScreen from './screens/Auth';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 export type RootStackParamList = {
   Home: undefined;
   Details: undefined;
+  Auth: undefined;
+  SignIn: undefined;
+  SignUp: undefined;
 };
 
 function HomeScreen({
@@ -37,16 +42,23 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <PaperProvider>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            header: (props) => <CustomNavigationBar {...props} />,
-          }}
-        >
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Details" component={DetailsScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <ActionSheetProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            screenOptions={{
+              header: (props) => <CustomNavigationBar {...props} />,
+            }}
+          >
+            <Stack.Screen
+              name="Auth"
+              component={AuthScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Details" component={DetailsScreen} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </ActionSheetProvider>
     </PaperProvider>
   );
 }
